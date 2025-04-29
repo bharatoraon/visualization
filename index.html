@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Municipal Budget Bubble Chart</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <style>
+      .highcharts-figure,
+      .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 900px;
+        margin: 1em auto;
+      }
+      .highcharts-description {
+        margin: 0.3rem 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <figure class="highcharts-figure">
+      <div id="container"></div>
+      <p class="highcharts-description">
+        Average Revenue and Expenditure Allocation by Category (Bubble Size =
+        INR Cr)
+      </p>
+    </figure>
+    <script>
+      Highcharts.chart("container", {
+        chart: {
+          type: "packedbubble",
+          height: "100%",
+        },
+        title: {
+          text: "Municipal Budget Allocation",
+          align: "center",
+        },
+        tooltip: {
+          useHTML: true,
+          pointFormat: "<b>{point.name}</b>: {point.value} Cr",
+        },
+        plotOptions: {
+          packedbubble: {
+            minSize: "30%",
+            maxSize: "100%",
+            zMin: 0,
+            zMax: 800,
+            layoutAlgorithm: {
+              gravitationalConstant: 0.05,
+              splitSeries: true,
+              seriesInteraction: false,
+              dragBetweenSeries: true,
+              parentNodeLimit: true,
+            },
+            dataLabels: {
+              enabled: true,
+              format: "{point.name}",
+              filter: {
+                property: "value",
+                operator: ">",
+                value: 50,
+              },
+              style: {
+                color: "black",
+                textOutline: "none",
+                fontWeight: "normal",
+              },
+            },
+          },
+        },
+        series: [
+          {
+            name: "Revenue",
+            data: [
+              { name: "Own Income", value: 741.92 },
+              { name: "Tax Revenue", value: 143.17 },
+              { name: "Fixed Revenue Income", value: 32.34 },
+              { name: "User Fees & Charges", value: 72.39 },
+              { name: "Water Supply", value: 72.49 },
+              { name: "Rent from Properties", value: 32.16 },
+              { name: "Investment Income", value: 6.71 },
+              { name: "Capital Deposits", value: 17 },
+              { name: "Grants", value: 328.63 },
+              { name: "Loans", value: 96.61 },
+              { name: "Other Income", value: 17.75 },
+            ],
+          },
+          {
+            name: "Expenditure",
+            data: [
+              { name: "Salaries & Allowances", value: 218.48 },
+              { name: "Pensions", value: 120.8 },
+              { name: "Repairs & Maintenance", value: 123.13 },
+              { name: "Water Supply Expenses", value: 125.3 },
+              { name: "Capital Expenditure", value: 58.63 },
+              { name: "Schemes", value: 35.17 },
+              { name: "Tax Refunds", value: 17.38 },
+              { name: "Loan Expenses", value: 13.56 },
+              { name: "Admin Expenses", value: 15.34 },
+              { name: "Development Works", value: 13.01 },
+              { name: "Share in Schemes", value: 40.83 },
+              { name: "Plan Preparation", value: 3.5 },
+              { name: "Public Health", value: 6.368 },
+              { name: "Roads & Infra", value: 81.24 },
+            ],
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>
